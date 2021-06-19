@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
+import { PaginatedResult } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { Member } from '../_models/member';
 export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
-
+  paginationResult: PaginatedResult<Member[]> = new PaginatedResult<Member[]>();
   constructor(private http: HttpClient) { }
 
   getMembers() {
