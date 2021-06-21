@@ -16,11 +16,11 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
-        private readonly IMapper _map;
+        private readonly IMapper _mapper;
 
-        public AccountController(DataContext context, ITokenService tokenService, IMapper map)
+        public AccountController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
-            _map = map;
+            _mapper = mapper;
             _tokenService = tokenService;
             _context = context;
         }
@@ -30,7 +30,7 @@ namespace API.Controllers
         {
             if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
 
-            var user = _map.Map<AppUser>(registerDto);
+            var user = _mapper.Map<AppUser>(registerDto);
 
             using var hmac = new HMACSHA512();
 
